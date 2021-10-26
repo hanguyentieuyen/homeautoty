@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" media="all">
+
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="wrapper">
+      <div class="header">
+        <div class="header__temp">
+          <h3>Nhiệt độ</h3>
+          <span id="textTemp"></span> <span>°C</span>
+        </div>
+        <div class="header__hum">
+          <h3>Độ ẩm</h3>
+          <span id="textHum"></span> <span>%</span>
+        </div>
+        <div class="header__gas">
+          <h3>Nồng độ khí gas</h3>
+          <span id="textGas"></span> <span>%</span>
+        </div>
+      </div>
+      <div class="container__auto">
+        <div class="auto__control">
+          <div class="auto__box">
+            <p>Cơ bản</p>
+            <input type="checkbox" id="toggle-context-basic" class="offscreen"></input>
+            <label for="toggle-context-basic" class="switch"></label>
+          </div>
+          <div class="auto__box">
+            <p>Tiếp khách</p>
+            <input type="checkbox" id="toggle-context-greeting" class="offscreen"></input>
+            <label for="toggle-context-greeting" class="switch"></label>
+          </div>
+          <div class="auto__box">
+            <p>Đi vắng</p>
+            <input type="checkbox" id="toggle-context-goout" class="offscreen"></input>
+            <label for="toggle-context-goout" class="switch"></label>
+          </div>
+          <div class="auto__box">
+            <p>Đi ngủ</p>
+            <input type="checkbox" id="toggle-context-sleep" class="offscreen"></input>
+            <label for="toggle-context-sleep" class="switch"></label>  
+          </div>
+        </div>
+      </div>
+      <div class="container__manual">
+        <div class="device__control">
+          
+            <div class="device__box">
+                <p>Đèn phòng khách</p>
+                <input type="checkbox" id="toggle-living-room-light" class="offscreen "></input>
+                <label for="toggle-living-room-light" class="switch"></label> 
+            </div>
+            <div class="device__box" >
+                <p>Đèn phòng bếp</p>
+                <input type="checkbox" id="toggle-kitchen-light" class="offscreen"></input>
+                <label for="toggle-kitchen-light" class="switch"></label> 
+            </div>
+            <div class="device__box" >
+                <p>Đèn phòng ngủ 1</p>
+                <input type="checkbox" id="toggle-sleep-light1" class="offscreen"></input>
+                <label for="toggle-sleep-light1" class="switch"></label>    
+            </div>
+            <div class="device__box" >
+              <p>Đèn phòng ngủ 2</p>
+              <input type="checkbox" id="toggle-sleep-light2" class="offscreen"></input>
+              <label for="toggle-sleep-light2" class="switch"></label>
+            </div>
+            <div class="device__box" >
+                <p>Đèn phòng vệ sinh</p>
+                <input type="checkbox" id="toggle-bath-light" class="offscreen"></input>
+                <label for="toggle-bath-light" class="switch"></label>  
+            </div>
+
+            <div class="device__box">
+              <p>Quạt phòng khách</p>
+              <input type="checkbox" id="toggle-living-room-fan" class="offscreen"></input>
+              <label for="toggle-living-room-fan" class="switch"></label>
+            </div>
+            <div class="device__box" >
+              <p>Quạt phòng bếp</p>
+              <input type="checkbox" id="toggle-kitchen-fan" class="offscreen"></input>
+              <label for="toggle-kitchen-fan" class="switch"></label>
+            </div>
+            <div class="device__box" >
+              <p>Quạt phòng ngủ 1</p>
+              <input type="checkbox" id="toggle-sleep-fan1" class="offscreen"></input>
+              <label for="toggle-sleep-fan1" class="switch"></label>
+            </div>
+            <div class="device__box" >
+              <p>Quạt phòng ngủ 2</p>
+              <input type="checkbox" id="toggle-sleep-fan2" class="offscreen"></input>
+              <label for="toggle-sleep-fan2" class="switch"></label>  
+            </div>
+          
+        </div>  
+      </div>
+    </div>
+
+	
+	<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-functions.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+    <script src="script.js"></script>
+    <script src="/main.js"></script>
+</body>
+</html>
