@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "homeautoty"
+  },
+  "targets": {
+    "homeautoty": {
+      "hosting": {
+        "login": [
+          "homeautoty"
+        ]
+      }
+    }
   }
 }
