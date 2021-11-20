@@ -5,104 +5,249 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="./login/img/favicon.png"/>
-    <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" media="all">
-
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <title>Home Automation</title>
 </head>
 <body>
 
     <div class="wrapper">
+      <div class="welcome"> 
+        <h2>Welcome to your house ! </h2> 
+               <!--Weather App-->
+       <div class="weather__wrapper">
+        <img src="./icons/haze.svg" alt="Weather Icon">
+        <div class="temp">
+          <span class="number">__</span>
+          <span class="deg">°C</span>
+        </div>
+        <div class="weather">__</div>
+        <div class="location">
+          <i class="bx bx-map"></i>
+          <span>__</span>
+        </div>
+        <div class="bottom__details">
+          <div class="column feels">
+            <i class="bx bxs-thermometer"></i>
+            <div class="details">
+              <div class="temp">
+                <span class="number-1">__</span>
+                <span class="deg">°C</span>
+              </div>
+              <p>Feels like</p>
+            </div>
+          </div>
+          <div class="column humidity">
+            <i class="bx bxs-droplet-half"></i>
+            <div class="details">
+              <div class="temp">
+                <span>__%</span>
+              </div>
+              <p>Humidity</p>
+            </div>
+          </div>
+        </div>
+       </div>
+      
+      </div>
+
+      <!----Slides show---->
+      <!-- <div class="slide-container">
+        <div class="slide fade">
+          <div class="number-slide">1 / 3</div>
+          <img src="" alt="">
+          <span class="text-slide">Ha Nguyen Tieu Yen</span>
+        </div>
+        <div class="slide fade">
+          <div class="number-slide">2 / 3</div>
+          <img src="" alt="">
+          <span class="text-slide">Nguyen Tan Thanh</span>
+        </div>
+        <div class="slide fade">
+          <div class="number-slide">3 / 3</div>
+          <img src="" alt="">
+          <span class="text-slide">Ha Nguyen Tieu Yen</span>
+        </div>
+      </div> -->
+
+
+      
       <div class="header">
         <div class="header__temp">
-          <h3>Nhiệt độ</h3>
-          <span id="textTemp"></span> <span>°C</span>
+          <i class="bx bxs-thermometer"></i>
+          <div>
+            <h4 class="text-monitor">Temp</h4>
+            <span id="textTemp"></span> 
+            <span>°C</span>
+          </div>
         </div>
         <div class="header__hum">
-          <h3>Độ ẩm</h3>
-          <span id="textHum"></span> <span>%</span>
+          <i class="bx bxs-droplet-half"></i>
+          <div>
+            <h4 class="text-monitor">Hum</h4>
+            <span id="textHum"></span> <span>%</span>
+          </div>
         </div>
         <div class="header__gas">
-          <h3>Nồng độ khí gas</h3>
-          <span id="textGas"></span> <span>%</span>
-        </div>
-      </div>
-      <div class="container__auto">
-        <div class="auto__control">
-          <div class="auto__box">
-            <p>Cơ bản</p>
-            <input type="checkbox" id="toggle-context-basic" class="offscreen"></input>
-            <label for="toggle-context-basic" class="switch"></label>
-          </div>
-          <div class="auto__box">
-            <p>Tiếp khách</p>
-            <input type="checkbox" id="toggle-context-greeting" class="offscreen"></input>
-            <label for="toggle-context-greeting" class="switch"></label>
-          </div>
-          <div class="auto__box">
-            <p>Đi vắng</p>
-            <input type="checkbox" id="toggle-context-goout" class="offscreen"></input>
-            <label for="toggle-context-goout" class="switch"></label>
-          </div>
-          <div class="auto__box">
-            <p>Đi ngủ</p>
-            <input type="checkbox" id="toggle-context-sleep" class="offscreen"></input>
-            <label for="toggle-context-sleep" class="switch"></label>  
+          <i class="bx bxs-droplet-half"></i>
+          <div>
+            <h4 class="text-monitor">Gas</h4>
+            <span id="textGas"></span> <span>%</span>
           </div>
         </div>
       </div>
-      <div class="container__manual">
-        <div class="device__control">
-          
-            <div class="device__box">
-                <p>Đèn phòng khách</p>
-                <input type="checkbox" id="toggle-living-room-light" class="offscreen "></input>
-                <label for="toggle-living-room-light" class="switch"></label> 
+     
+      <div class="tabs">
+        <div class="tab-item active">
+          <i class="tab-icon fas fa-couch"></i>
+          Living Room
+        </div>
+        <div class="tab-item">
+          <i class="tab-icon fas fa-utensils"></i>
+          Kitchen
+        </div>
+        <div class="tab-item">
+          <i class="tab-icon fas fa-bed"></i>
+          Bedroom 1
+        </div>
+        <div class="tab-item">
+          <i class="tab-icon fas fa-bed"></i>
+          Bedroom 2
+        </div>
+        <div class="tab-item">
+          <i class="tab-icon fas fa-bath"></i>
+          Bathroom
+        </div>
+        <div class="tab-item">
+          <i class="fas fa-cogs"></i>
+          Auto context
+        </div>
+        <div class="line"></div>
+      </div>  
+       <!-- Tab content -->
+      <div class="tab-content">
+        <div class="tab-pane active">
+          <div class="device__control">
+            <div class="device__box device__icon-1">
+              <i class="fas fa-lightbulb"></i>
+              <p>Light</p>
+              <input type="checkbox" id="toggle-living-room-light" class="offscreen "></input>
+              <label for="toggle-living-room-light" class="switch"></label> 
             </div>
-            <div class="device__box" >
-                <p>Đèn phòng bếp</p>
-                <input type="checkbox" id="toggle-kitchen-light" class="offscreen"></input>
-                <label for="toggle-kitchen-light" class="switch"></label> 
-            </div>
-            <div class="device__box" >
-                <p>Đèn phòng ngủ 1</p>
-                <input type="checkbox" id="toggle-sleep-light1" class="offscreen"></input>
-                <label for="toggle-sleep-light1" class="switch"></label>    
-            </div>
-            <div class="device__box" >
-              <p>Đèn phòng ngủ 2</p>
-              <input type="checkbox" id="toggle-sleep-light2" class="offscreen"></input>
-              <label for="toggle-sleep-light2" class="switch"></label>
-            </div>
-            <div class="device__box" >
-                <p>Đèn phòng vệ sinh</p>
-                <input type="checkbox" id="toggle-bath-light" class="offscreen"></input>
-                <label for="toggle-bath-light" class="switch"></label>  
-            </div>
-
-            <div class="device__box">
-              <p>Quạt phòng khách</p>
+            <div class="device__box device__icon-2">
+              <i class="fas fa-fan"></i>
+              <p>Fan</p>
               <input type="checkbox" id="toggle-living-room-fan" class="offscreen"></input>
               <label for="toggle-living-room-fan" class="switch"></label>
             </div>
-            <div class="device__box" >
-              <p>Quạt phòng bếp</p>
+            <div class="device__box device__icon-10">
+              <!-- <i class="fas fa-door-closed"></i> -->
+              <p class="icon-door"></p>
+              <p>Door</p>
+              <input type="checkbox" id="toggle-living-room-door" class="offscreen "></input>
+              <label for="toggle-living-room-door" class="switch"></label> 
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane">
+          <div class="device__control">
+            <div class="device__box device__icon-3" >
+              <i class="fas fa-lightbulb"></i>
+              <p>Light</p>
+              <input type="checkbox" id="toggle-kitchen-light" class="offscreen"></input>
+              <label for="toggle-kitchen-light" class="switch"></label> 
+            </div>
+            <div class="device__box device__icon-4" >
+              <i class="fas fa-fan"></i>
+              <p>Fan</p>
               <input type="checkbox" id="toggle-kitchen-fan" class="offscreen"></input>
               <label for="toggle-kitchen-fan" class="switch"></label>
             </div>
-            <div class="device__box" >
-              <p>Quạt phòng ngủ 1</p>
+            <div class="device__box device__icon-11">
+              <p class="icon-window"></p>
+              <p>Window</p>
+              <input type="checkbox" id="toggle-kitchen-window" class="offscreen "></input>
+              <label for="toggle-kitchen-window" class="switch"></label> 
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane">            
+          <div class="device__control">
+            <div class="device__box device__icon-5" >
+              <i class="fas fa-lightbulb"></i>
+              <p>Light</p>
+              <input type="checkbox" id="toggle-sleep-light1" class="offscreen"></input>
+              <label for="toggle-sleep-light1" class="switch"></label>    
+            </div>
+            <div class="device__box device__icon-6" >
+              <i class="fas fa-fan"></i>
+              <p>Fan</p>
               <input type="checkbox" id="toggle-sleep-fan1" class="offscreen"></input>
               <label for="toggle-sleep-fan1" class="switch"></label>
             </div>
-            <div class="device__box" >
-              <p>Quạt phòng ngủ 2</p>
+          </div>
+        </div>
+        <div class="tab-pane">
+          <div class="device__control">
+            <div class="device__box device__icon-7" >
+              <i class="fas fa-lightbulb"></i>
+              <p>Light</p>
+              <input type="checkbox" id="toggle-sleep-light2" class="offscreen"></input>
+              <label for="toggle-sleep-light2" class="switch"></label>
+            </div>
+            <div class="device__box device__icon-8" >
+              <i class="fas fa-fan"></i>
+              <p>Fan</p>
               <input type="checkbox" id="toggle-sleep-fan2" class="offscreen"></input>
               <label for="toggle-sleep-fan2" class="switch"></label>  
             </div>
-          
-        </div>  
+          </div>
+        </div>
+        <div class="tab-pane">
+          <div class="device__control">
+            <div class="device__box device__icon-9" >
+              <i class="fas fa-lightbulb"></i>
+              <p>Light</p>
+              <input type="checkbox" id="toggle-bath-light" class="offscreen"></input>
+              <label for="toggle-bath-light" class="switch"></label>  
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane">
+          <div class="auto__control">
+            <div class="auto__box">
+              <p>Basic</p>
+              <input type="checkbox" id="toggle-context-basic" class="offscreen"></input>
+              <label for="toggle-context-basic" class="switch"></label>
+            </div>
+            <div class="auto__box">
+              <p>Greeting</p>
+              <input type="checkbox" id="toggle-context-greeting" class="offscreen"></input>
+              <label for="toggle-context-greeting" class="switch"></label>
+            </div>
+            <div class="auto__box">
+              <p>Go out</p>
+              <input type="checkbox" id="toggle-context-goout" class="offscreen"></input>
+              <label for="toggle-context-goout" class="switch"></label>
+            </div>
+            <div class="auto__box">
+              <p>Sleep</p>
+              <input type="checkbox" id="toggle-context-sleep" class="offscreen"></input>
+              <label for="toggle-context-sleep" class="switch"></label>  
+            </div>
+          </div>
+        </div>
       </div>
+      
+      <!-- <div class="container__auto">
+      </div> -->
+      <!-- <div class="container__manual">
+        <div class="device__control">
+        </div>  
+      </div> -->
     </div>
 
 	

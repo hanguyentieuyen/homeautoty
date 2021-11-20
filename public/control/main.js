@@ -17,6 +17,8 @@ const gas = document.getElementById('textGas');
 var root = firebase.database().ref('light-cluster');
 var root1 = firebase.database().ref('fan-cluster');
 var root2 = firebase.database().ref('context-cluster');
+var root3 = firebase.database().ref('door-cluster');
+
 
 /*light*/
 var checkbox = document.getElementById('toggle-living-room-light');
@@ -34,10 +36,110 @@ var checkbox9 = document.getElementById('toggle-context-basic');
 var checkbox10 = document.getElementById('toggle-context-greeting');
 var checkbox11 = document.getElementById('toggle-context-goout');
 var checkbox12 = document.getElementById('toggle-context-sleep');
+/*door*/
+var checkbox13 = document.getElementById('toggle-living-room-door');
+var checkbox14 = document.getElementById('toggle-kitchen-window');
+
+/*Weather*/
+
+const apiKey = '937cf77563e93771556d1c0c17f8ab7b';
+var api;
+var city = 'Ho Chi Minh';
+const weatherIcon = document.querySelector(".weather__wrapper img");
 
 
+/*Tabbar*/
+var tabs = document.querySelectorAll('.tab-item');
+var panes = document.querySelectorAll('.tab-pane');
+var tabActive = document.querySelector('.tab-item.active');
+var line = document.querySelector('.tabs .line');
 
-/*******************Read temp, hum, gas*************/
+/*SLides*/
+var slides = document.querySelectorAll('.slide');
+var dots = document.getElementsByClassName('dot');
+//********************** Show Sliders *****************************//
+var slideIndex = 0;
+// showSlides();
+function showSlides(){
+  for(i=0; i< slides.length;i++){
+    slides[i].style.display = 'none';
+    // console.log('i = '+i);
+  }
+  // console.log('index'+slideIndex);
+  slideIndex ++;
+  
+  if(slideIndex > slides.length){slideIndex = 1};
+  slides[slideIndex-1].style.display = "block";                                                                                        
+  
+  // setTimeout(showSlides, 5000)
+}
+
+//********************** Weather *****************************//
+//***Call API****/
+
+setInterval(resquestApi(city),10000) 
+function resquestApi(city){
+  console.log(city)
+  api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  fetchData();
+}
+
+/**** Response values from API ****/
+function fetchData(){
+  fetch(api)
+    // .then(response => console.log(response.json()))
+    .then(response => response.json())
+    .then(result =>   weatherInfo(result))
+}
+
+/****** Get values and pass on html*****/
+function weatherInfo(info){
+    const city = info.name;
+    const country = info.sys.country;
+    const {description, id} = info.weather[0];
+    const {feels_like, humidity, temp} = info.main;
+    if(id == 800){
+      weatherIcon.src = "icons/clear.svg";
+    }else if(id >= 200 && id <= 232){
+      weatherIcon.src = "icons/storm.svg";
+    }else if(id >= 600 && id <= 622){
+      weatherIcon.src = "icons/snow.svg";
+    }else if(id >= 701 && id <= 782){
+      weatherIcon.src = "icons/haze.svg";
+    }else if(id >= 801 && id <= 804){
+      weatherIcon.src = "icons/cloud.svg";
+    }else if((id >= 300 && id <= 321) || (id >= 500 && id <= 531)){
+      weatherIcon.src = "icons/rain.svg";
+    }
+    
+    document.querySelector(".temp .number").innerText = Math.floor(temp);
+    document.querySelector(".weather").innerText = description;
+    document.querySelector(".location span").innerText = `${city}, ${country}`;
+    document.querySelector(".temp .number-1").innerText = Math.floor(feels_like);
+    document.querySelector(".humidity span").innerText = `${humidity}%`;
+    
+  }
+
+/*****************Tabbar*****************************/
+line.style.left = tabActive.offsetLeft + 'px';
+line.style.width = tabActive.offsetWidth + 'px';
+tabs.forEach(function(tab, index) {
+  const pane = panes[index];
+  tab.onclick = function(){
+    // console.log(this);
+    // console.log(pane);
+    // check class : 'tab-item' and 'active', remove class: active
+    document.querySelector('.tab-item.active').classList.remove('active');
+    this.classList.add('active');
+    document.querySelector('.tab-pane.active').classList.remove('active');
+    pane.classList.add('active');
+
+    line.style.left = this.offsetLeft + 'px';
+    line.style.width = this.offsetWidth + 'px';
+  }
+})
+
+/****************** Read temp, hum, gas ************/
 var rootTemp = firebase.database().ref('monitor-cluster');
 rootTemp.child('temp').on ('value', function(snapshot) {
   temp.innerText = snapshot.val();
@@ -60,9 +162,11 @@ root.child('living-room-light').on ('value', function(snapshot) {
   if(statusLight === "1" ){
     checkbox.classList.add('toggle-ball');
     checkbox.classList.add('toggle-background');
+    document.querySelector('.device__icon-1 .fa-lightbulb').style.color = "#FED100";
   }else if(statusLight === "0" ){
     checkbox.classList.remove('toggle-ball');
     checkbox.classList.remove('toggle-background');
+    document.querySelector('.device__icon-1 .fa-lightbulb').style.color = "initial";
   }
 })
 
@@ -72,9 +176,11 @@ root.child('kitchen-light').on ('value', function(snapshot) {
   if(statusLight1 === "1" ){
     checkbox1.classList.add('toggle-ball');
     checkbox1.classList.add('toggle-background');
+    document.querySelector('.device__icon-3 .fa-lightbulb').style.color = "#FED100";
   }else if(statusLight1 === "0" ){
     checkbox1.classList.remove('toggle-ball');
     checkbox1.classList.remove('toggle-background');
+    document.querySelector('.device__icon-3 .fa-lightbulb').style.color = "initial";
   }
 })
 
@@ -84,9 +190,11 @@ root.child('sleep-light1').on ('value', function(snapshot) {
   if(statusLight2 === "1" ){
     checkbox2.classList.add('toggle-ball');
     checkbox2.classList.add('toggle-background');
+    document.querySelector('.device__icon-5 .fa-lightbulb').style.color = "#FED100";
   }else if(statusLight2 === "0" ){
     checkbox2.classList.remove('toggle-ball');
     checkbox2.classList.remove('toggle-background');
+    document.querySelector('.device__icon-5 .fa-lightbulb').style.color = "initial";
   }
 })
 
@@ -96,9 +204,13 @@ root.child('sleep-light2').on ('value', function(snapshot) {
   if(statusLight3 === "1" ){
     checkbox3.classList.add('toggle-ball');
     checkbox3.classList.add('toggle-background');
+    document.querySelector('.device__icon-7 .fa-lightbulb').style.color = "#FED100";
+
   }else if(statusLight3 === "0" ){
     checkbox3.classList.remove('toggle-ball');
     checkbox3.classList.remove('toggle-background');
+    document.querySelector('.device__icon-7 .fa-lightbulb').style.color = "initial";
+
   }
 })
 
@@ -108,9 +220,13 @@ root.child('bath-light').on ('value', function(snapshot) {
   if(statusLight4 === "1" ){
     checkbox4.classList.add('toggle-ball');
     checkbox4.classList.add('toggle-background');
+    document.querySelector('.device__icon-9 .fa-lightbulb').style.color = "#FED100";
+
   }else if(statusLight4 === "0" ){
     checkbox4.classList.remove('toggle-ball');
     checkbox4.classList.remove('toggle-background');
+    document.querySelector('.device__icon-9 .fa-lightbulb').style.color = "initial";
+
   }
 })
 
@@ -121,9 +237,11 @@ root1.child('living-room-fan').on ('value', function(snapshot) {
   if(statusLight5 === "1" ){
     checkbox5.classList.add('toggle-ball');
     checkbox5.classList.add('toggle-background');
+    document.querySelector('.device__icon-2 .fa-fan').style.color = "#FDD020";
   }else if(statusLight5 === "0" ){
     checkbox5.classList.remove('toggle-ball');
     checkbox5.classList.remove('toggle-background');
+    document.querySelector('.device__icon-2 .fa-fan').style.color = "initial";
   }
 })
 
@@ -133,9 +251,11 @@ root1.child('kitchen-fan').on ('value', function(snapshot) {
   if(statusLight6 === "1" ){
     checkbox6.classList.add('toggle-ball');
     checkbox6.classList.add('toggle-background');
+    document.querySelector('.device__icon-4 .fa-fan').style.color = "#FDD020";
   }else if(statusLight6 === "0" ){
     checkbox6.classList.remove('toggle-ball');
     checkbox6.classList.remove('toggle-background');
+    document.querySelector('.device__icon-4 .fa-fan').style.color = "initial";
   }
 })
 
@@ -145,9 +265,11 @@ root1.child('sleep-fan1').on ('value', function(snapshot) {
   if(statusLight7 === "1" ){
     checkbox7.classList.add('toggle-ball');
     checkbox7.classList.add('toggle-background');
+    document.querySelector('.device__icon-6 .fa-fan').style.color = "#FDD020";
   }else if(statusLight7 === "0" ){
     checkbox7.classList.remove('toggle-ball');
     checkbox7.classList.remove('toggle-background');
+    document.querySelector('.device__icon-6 .fa-fan').style.color = "initial";
   }
 })
 
@@ -157,13 +279,15 @@ root1.child('sleep-fan2').on ('value', function(snapshot) {
   if(statusLight8 === "1" ){
     checkbox8.classList.add('toggle-ball');
     checkbox8.classList.add('toggle-background');
+    document.querySelector('.device__icon-8 .fa-fan').style.color = "#FDD020";
   }else if(statusLight8 === "0" ){
     checkbox8.classList.remove('toggle-ball');
     checkbox8.classList.remove('toggle-background');
+    document.querySelector('.device__icon-8 .fa-fan').style.color = "initial";
   }
 })
 
-/***************Read status context****************/
+/***************Read status Auto context****************/
 root2.child('basic').on('value', function(snapshot){
   let status9 = snapshot.val();
   if(status9 === "1"){
@@ -207,6 +331,35 @@ root2.child('sleep').on('value', function(snapshot){
     checkbox12.classList.remove('toggle-background');
   }
 })
+/***************Read status door****************/
+root3.child('living-room-door').on('value', function(snapshot){
+  let status13 = snapshot.val();
+  console.log(status13);
+  if(status13 === "1"){
+    checkbox13.classList.add('toggle-ball');
+    checkbox13.classList.add('toggle-background');
+    document.querySelector('.icon-door').innerHTML = '<i class="fas fa-door-open"></i>';
+  }else if(status13 === "0"){
+    checkbox13.classList.remove('toggle-ball');
+    checkbox13.classList.remove('toggle-background');
+    document.querySelector('.icon-door').innerHTML = '<i class="fas fa-door-closed"></i>';
+  }
+})
+root3.child('kitchen-window').on('value', function(snapshot){
+  let status14 = snapshot.val();
+  if(status14 === "1"){
+    checkbox14.classList.add('toggle-ball');
+    checkbox14.classList.add('toggle-background');
+    document.querySelector('.icon-window').innerHTML = '<i class="fas fa-door-open"></i>';
+
+  }else if(status14 === "0"){
+    checkbox14.classList.remove('toggle-ball');
+    checkbox14.classList.remove('toggle-background');
+    document.querySelector('.icon-window').innerHTML = '<i class="fas fa-door-closed"></i>';
+
+  }
+})
+
 /************Control by toggle button************/
 /*light*/
 checkbox.addEventListener('change', e =>{
@@ -391,6 +544,30 @@ checkbox12.addEventListener('change', e =>{
     checkbox12.classList.toggle('toggle-ball');
     checkbox12.classList.toggle('toggle-background');
     root2.child('sleep').set('0');
+    
+  }
+})
+checkbox13.addEventListener('change', e =>{
+  if(e.target.checked){
+    checkbox13.classList.toggle('toggle-ball');
+    checkbox13.classList.toggle('toggle-background');
+    root3.child('living-room-door').set('1');
+  }else{
+    checkbox13.classList.toggle('toggle-ball');
+    checkbox13.classList.toggle('toggle-background');
+    root3.child('living-room-door').set('0');
+    
+  }
+})
+checkbox14.addEventListener('change', e =>{
+  if(e.target.checked){
+    checkbox14.classList.toggle('toggle-ball');
+    checkbox14.classList.toggle('toggle-background');
+    root3.child('kitchen-window').set('1');
+  }else{
+    checkbox14.classList.toggle('toggle-ball');
+    checkbox14.classList.toggle('toggle-background');
+    root3.child('kitchen-window').set('0');
     
   }
 })

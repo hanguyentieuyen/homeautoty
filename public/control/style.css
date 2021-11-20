@@ -2,16 +2,17 @@
 
 *{
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
   }
 
   body{
     font-family: 'Poppins', sans-serif;
     color: #000;
     font-size: 20px;
+    background-color: #ebf5fc;
   }
-  span{
-    font-size: 40px;
-  }
+
   .wrapper{
     max-width: 1200px;
     margin: 0 auto;
@@ -30,6 +31,14 @@
     box-shadow: 0 5px 8px 5px rgba(0, 0, 0, 0.07);
   }
 
+  .device__box i {
+    font-size: 40px;
+    
+  }
+  .device__icon-11 i,
+  .device__icon-10 i{
+    color: #FDD020;
+  }
   .switch{
     display: flex;
     align-items: center;
@@ -70,19 +79,29 @@
     position: absolute;
     left: -9999px;
   }
-/********************************************************************************/
+
 .header{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 25px;
   margin: 40px 0;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
+              inset -5px -5px 5px rgba(255, 255, 255, 0.5),
+              5px 5px 5px rgba(0, 0, 0, 0.05),
+              -5px -5px 5px rgba(255, 255, 255, 0.5);
 }
 .header__temp,
 .header__hum,
 .header__gas{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0px;
   background-color: white;
   text-align: center;
-  height: 250px;
+  min-height: 100px;
   width: 100%;
   border-radius: 15px;
   box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
@@ -90,13 +109,16 @@
               5px 5px 5px rgba(0, 0, 0, 0.05),
               -5px -5px 5px rgba(255, 255, 255, 0.5);
 }
-
-
-h3{
-  font-size: 30px;
+.header__temp i,
+.header__hum i,
+.header__gas i{
+  font-size:50px
+}
+.text-monitor{
+  font-size: 18px;
   font-weight: 600;
 }
-/********************************************************************************/
+
 
 .container__auto{
   max-width: 100%;
@@ -105,11 +127,9 @@ h3{
 }
 .device__control,
 .auto__control{
-  display: flex;
-  flex-wrap: wrap;
   background-color: #ebf5fc;
   padding: 20px;
-  
+  margin-bottom: 100px;
   border-radius: 15px;
   box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
               inset -5px -5px 5px rgba(255, 255, 255, 0.5),
@@ -130,14 +150,222 @@ h3{
 
   .device__control{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-columns: 1fr 1fr ;
     grid-gap: 20px;
   }
 
-  /*********************************************************/
+  /******************************** Weather ************************************/
+  .weather__wrapper{
+    max-width: 380px;
+    width: 100%;
+    text-align: center;
+    background-color: #ebf5fc;
+    border-radius: 15px;
+    box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
+              inset -5px -5px 5px rgba(255, 255, 255, 0.5),
+              5px 5px 5px rgba(0, 0, 0, 0.05),
+              -5px -5px 5px rgba(255, 255, 255, 0.5);
+  }
+  .weather__wrapper img{
+    max-width:  125px;
+    padding: 20px 10px;
+  }
+  .weather__wrapper .temp{
+    display: flex;
+    justify-content:center;
+  }
+  .weather__wrapper .temp .number{
+      font-weight: 600;
+      font-size: 40px;
+  }
+  .weather__wrapper .location span{
+    font-size: 20px;
+  }
+
+  .weather__wrapper .temp .deg{
+      font-size: 40px;
+  }
+
+  .weather__wrapper .bottom__details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #bfbfbf;
+    width: 100%;
+  }
+
+  .bottom__details .column{
+      width: 100%;
+      display: flex;
+      padding: 15px 0;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .column i{
+      color: #43affc;
+      font-size: 40px;
+  }
+  .column.humidity{
+      border-left: 1px solid #bfbfbf;
+  }
+  .details .temp .number-1, 
+  .humidity span {
+      font-size: 18px;
+      font-weight: 500;
+      margin-top: -3px;
+  }
+  .details .temp .deg{
+      margin: 0;
+      font-size: 16px;
+      padding:0 2px 0 1px;
+  }
+  .details p{
+      font-size: 14px;
+      margin-top: -6px;
+  }
+  /********************************* Tabs ***********************************/
+
+  .tabs{
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+  .tabs .line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 6px;
+    border-radius: 15px;
+    background-color: #7983ff;
+    transition: all 0.2s ease;
+  }
+
+  .tab-item{
+    min-width: 200px;
+    padding: 16px 20px 14px 20px;
+    font-size: 20px;
+    text-align: center;
+    color: #7983ff;
+    background-color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 5px solid transparent;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+
+  .tab-icon {
+    font-size: 24px;
+    width: 32px;
+    top: 2px;
+  }
+
+  .tab-item:hover {
+    opacity: 1;
+    background-color: rgba(121, 131, 255, 0.06);
+    border-color: #7983ff;
+  }
+  .tab-item.active {
+    opacity: 1;
+  }
+  .tab-content {
+    padding: 28px 0;
+  }
+  .tab-pane {
+    color: #333;
+    display: none;
+  }
+  .tab-pane.active {
+    display: block;
+  }
+  .tab-pane h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  /***************************** Welcome*******************************/
+  .welcome{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    border-radius: 15px;
+    background-color: #fff; 
+    padding: 30px;
+    background-image: url(./img/living-room.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
+                inset -5px -5px 5px rgba(255, 255, 255, 0.5),
+                5px 5px 5px rgba(0, 0, 0, 0.05),
+                -5px -5px 5px rgba(255, 255, 255, 0.5); */
+
+  }
+
+  h2{
+    text-align: center;
+    font-weight: 500;
+    font-size: 50px;
+    width: 100%;
+    color: #fff;
+    transform: translateY(-110px);
+  }
+
+  img{
+    width: 100%;
+    border-radius: 15px;
+    /* background-position: center;
+    background-size: content */
+  }
+  .slide{
+    display: none;
+   
+  }
+  .slide-container{
+    position: relative;
+    /* padding-left: 20px;
+    padding-right: 30px; */
+  }
+  .text-slide{
+    color: #fff;
+    font-size: 15px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+  }
+  .number-slide{
+    color: #fff;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top:0;
+  }
 
 
 
+  .fade{
+    --webkit-animation-name: fade;
+    --webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s ;
+  }
+  @-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
+  @keyframes fade {
+    from {
+      opacity: 0.4;
+    }
+    to{
+      opacity: 1;
+    }
+  }
+  /*****************************************************************************/
 @media only screen and (min-width: 1024px){
   .header{
     display: grid;
@@ -154,6 +382,16 @@ h3{
     display: grid;
     grid-template-columns: 1fr 1fr;
     
+  }
+  .tabs{
+    display: flex;
+    overflow-x: auto;
+  }
+  .welcome{
+    margin-top: 0;
+  }
+  .welcome h2{
+    font-size: 40px;
   }
 
 }
@@ -181,6 +419,18 @@ h3{
   span{
     font-size: 20px;
   }
+  .tabs{
+    display: flex;
+    overflow-x: auto;
+  }
+  .welcome{
+    margin-top: 0;
+  }
+  .welcome h2{
+    font-size: 25px;
+    transform: translateY(-80px);
+  }
+
 }
 
 
@@ -200,6 +450,19 @@ h3{
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 20px;
+  }
+  .tabs{
+    display: flex;
+    overflow-x: auto;
+  }
+  .welcome{
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+  }
+  .welcome h2{
+    font-size: 25px;
+    transform: translateY(0px);
   }
 
 }
