@@ -18,6 +18,7 @@ var root = firebase.database().ref('light-cluster');
 var root1 = firebase.database().ref('fan-cluster');
 var root2 = firebase.database().ref('context-cluster');
 var root3 = firebase.database().ref('door-cluster');
+var root4 = firebase.database().ref('time');
 
 
 /*light*/
@@ -31,7 +32,7 @@ var checkbox5 = document.getElementById('toggle-living-room-fan');
 var checkbox6 = document.getElementById('toggle-kitchen-fan');
 var checkbox7 = document.getElementById('toggle-sleep-fan1');
 var checkbox8 = document.getElementById('toggle-sleep-fan2');
-/*context*/
+/*auto context*/
 var checkbox9 = document.getElementById('toggle-context-basic');
 var checkbox10 = document.getElementById('toggle-context-greeting');
 var checkbox11 = document.getElementById('toggle-context-goout');
@@ -57,22 +58,23 @@ var line = document.querySelector('.tabs .line');
 /*SLides*/
 var slides = document.querySelectorAll('.slide');
 var dots = document.getElementsByClassName('dot');
+
 //********************** Show Sliders *****************************//
 var slideIndex = 0;
 // showSlides();
-function showSlides(){
-  for(i=0; i< slides.length;i++){
-    slides[i].style.display = 'none';
-    // console.log('i = '+i);
-  }
-  // console.log('index'+slideIndex);
-  slideIndex ++;
+// function showSlides(){
+//   for(i=0; i< slides.length;i++){
+//     slides[i].style.display = 'none';
+//     // console.log('i = '+i);
+//   }
+//   // console.log('index'+slideIndex);
+//   slideIndex ++;
   
-  if(slideIndex > slides.length){slideIndex = 1};
-  slides[slideIndex-1].style.display = "block";                                                                                        
+//   if(slideIndex > slides.length){slideIndex = 1};
+//   slides[slideIndex-1].style.display = "block";                                                                                        
   
-  // setTimeout(showSlides, 5000)
-}
+//   // setTimeout(showSlides, 5000)
+// }
 
 //********************** Weather *****************************//
 //***Call API****/
@@ -119,6 +121,66 @@ function weatherInfo(info){
     document.querySelector(".humidity span").innerText = `${humidity}%`;
     
   }
+
+
+/*****************Alarm Clock*************************/
+var displayTime = document.querySelector('.time');
+var selecthour = document.getElementById('hours');
+var selectmin = document.getElementById('minutes');
+var selectampm = document.getElementById('ampm');
+var btnAlarm = document.getElementById('setclear');
+var notiAlarm = document.querySelector('.noti-alarm');
+var time, alarmTime, currentHour, currentMin;
+var activeAlarm = false;
+function realTime(){
+  let now = new Date();
+  time = now.toLocaleTimeString(); // time format AM PM
+  //time = now.getTime();
+  displayTime.textContent = time;
+  root4.child('real_time').set(time);
+  setTimeout(realTime, 1000);
+}
+realTime();
+
+function hours(id){
+  var select = id;
+  var hours = 23;
+  for(i = 0; i <= hours; i++){
+    select.options[select.options.length] = new Option(i < 10 ? "0" + i : i, i);
+  }
+}
+
+function minutes(id){
+  var select = id;
+  var min = 59;
+  for (i = 0; i<= min; i++){
+    select.options[select.options.length] = new Option(i < 10 ? "0" + i : i, i);
+  }
+}
+
+hours(selecthour);
+minutes(selectmin);
+
+btnAlarm.onclick = function(){
+  
+  if(activeAlarm === false){
+    selecthour.disabled = true;
+    selectmin.disabled = true;
+    alarmTime = selecthour.value + ":" + selectmin.value;
+    this.textContent = "Clear Alarm";
+    notiAlarm.textContent = "You'll wake up at the above time 😂"
+    activeAlarm = true;
+  }else{
+    selecthour.disabled = false;
+    selectmin.disabled = false;
+    alarmTime = "0";
+    this.textContent = "Set Alarm";
+    notiAlarm.textContent = "You have not set an alarm 😅";
+    activeAlarm = false;
+  }
+  console.log(alarmTime);
+  root4.child('alarm_time').set(alarmTime);
+}
 
 /*****************Tabbar*****************************/
 line.style.left = tabActive.offsetLeft + 'px';

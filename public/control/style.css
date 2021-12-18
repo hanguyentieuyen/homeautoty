@@ -302,7 +302,7 @@
     box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
                 inset -5px -5px 5px rgba(255, 255, 255, 0.5),
                 5px 5px 5px rgba(0, 0, 0, 0.05),
-                -5px -5px 5px rgba(255, 255, 255, 0.5); */
+                -5px -5px 5px rgba(255, 255, 255, 0.5); 
 
   }
 
@@ -346,25 +346,65 @@
   }
 
 
+/************************** Alarm Clock ****************************************/
+.clock{
+  margin-top: 40px;
+  border-radius: 15px;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
+              inset -5px -5px 5px rgba(255, 255, 255, 0.5),
+              5px 5px 5px rgba(0, 0, 0, 0.05),
+              -5px -5px 5px rgba(255, 255, 255, 0.5);
+}
+.clock-box{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 25px;
+  padding: 20px;
+  
+}
+.clock-box h3{
+  font-size: 65px;
+  text-align: center;
+  color: #111;
+}
+.alarm{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .fade{
-    --webkit-animation-name: fade;
-    --webkit-animation-duration: 1.5s;
-    animation-name: fade;
-    animation-duration: 1.5s ;
-  }
-  @-webkit-keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
-  }
-  @keyframes fade {
-    from {
-      opacity: 0.4;
-    }
-    to{
-      opacity: 1;
-    }
-  }
+.select-time span{
+  display: block;
+  padding-top: 10px;
+  font-size: 16px;
+}
+.select-time select{
+  width: 100px;
+  text-align: center;
+  font-size: 20px;
+  padding: 4px 0px;
+}
+.btn-clock{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-clock button{
+  background-color: #7983FF;
+  border-radius: 15px;
+  border: none;
+  padding: 14px 30px;
+  margin-top: 10px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  width: 200px;
+}
+.btn-clock button:hover{
+  opacity: 0.8;
+}
+
   /*****************************************************************************/
 @media only screen and (min-width: 1024px){
   .header{
@@ -393,6 +433,14 @@
   .welcome h2{
     font-size: 40px;
   }
+  .clock-box h3{
+    font-size: 40px;
+    line-height: 70px;
+  }
+  .btn-clock button {
+    font-size: 18px;
+    padding: 12px 24px;
+}
 
 }
 
@@ -430,6 +478,20 @@
     font-size: 25px;
     transform: translateY(-80px);
   }
+  .clock-box h3{
+    font-size: 40px;
+    line-height: 93px;
+  }
+  .select-time span{
+    font-size: 14px;
+  }
+  .select-time select{
+    font-size: 16px;
+  }
+  .btn-clock button{
+    font-size: 18px;
+    padding: 12px 24px;
+  }
 
 }
 
@@ -464,5 +526,18 @@
     font-size: 25px;
     transform: translateY(0px);
   }
-
+  .clock-box{
+    display: flex;
+    flex-direction: column;
+  }
+  .clock-box h3{
+    font-size: 35px;
+  }
+  .select-time select{
+    padding:0;
+  }
+  .btn-clock button{
+    font-size: 16px;
+    padding: 12px 24px;
+  }
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="./login/img/favicon.png"/>
+    <link rel="icon" type="image/png" href="../login/img/favicon.png"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet" media="all">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -54,26 +54,21 @@
       
       </div>
 
-      <!----Slides show---->
-      <!-- <div class="slide-container">
-        <div class="slide fade">
-          <div class="number-slide">1 / 3</div>
-          <img src="" alt="">
-          <span class="text-slide">Ha Nguyen Tieu Yen</span>
+      <div class="clock">
+        <div class="clock-box">
+          <h3 id="time" class="time"></h3>
+          <div class="alarm">
+            <div class="select-time">
+              <select id="hours"></select>
+              <select id="minutes"></select>
+              <span class="noti-alarm">You have not set an alarm 😅</span>
+            </div>
+          </div>
+          <div class="btn-clock">
+            <button id="setclear">Set Alarm</button>
+          </div>
         </div>
-        <div class="slide fade">
-          <div class="number-slide">2 / 3</div>
-          <img src="" alt="">
-          <span class="text-slide">Nguyen Tan Thanh</span>
-        </div>
-        <div class="slide fade">
-          <div class="number-slide">3 / 3</div>
-          <img src="" alt="">
-          <span class="text-slide">Ha Nguyen Tieu Yen</span>
-        </div>
-      </div> -->
-
-
+      </div>
       
       <div class="header">
         <div class="header__temp">
@@ -92,7 +87,7 @@
           </div>
         </div>
         <div class="header__gas">
-          <i class="bx bxs-droplet-half"></i>
+          <i class='bx bxs-zap'></i>
           <div>
             <h4 class="text-monitor">Gas</h4>
             <span id="textGas"></span> <span>%</span>
